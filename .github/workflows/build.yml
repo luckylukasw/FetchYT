@@ -1,0 +1,55 @@
+name: Build and Release FetchYT
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install project dependencies from pyproject.toml
+        run: |
+          python -m pip install --upgrade pip
+          pip install .
+          pip install pyinstaller
+
+      - name: Compile Executable with PyInstaller
+        run: |
+          pyinstaller --noconfirm --onedir --windowed `
+            --icon "assets/icon.ico" `
+            --add-data "core/bin/node.exe;core/bin" `
+            --add-data "assets/icon.ico;assets" `
+            --add-data "THIRD_PARTY_LICENSES.txt;." `
+            --add-data "LICENSE-LGPLv2.1.txt;." `
+            --add-data "LICENSE-LGPLv3.txt;." `
+            --name "FetchYT" `
+            main.py
+
+      - name: Package Release ZIP
+        shell: pwsh
+        run: |
+          Compress-Archive -Path "dist/FetchYT" -DestinationPath "FetchYT-windows-x64.zip"
+
+      - name: Upload Binary to GitHub Releases
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: FetchYT-windows-x64.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
