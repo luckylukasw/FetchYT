@@ -43,8 +43,7 @@ jobs:
 
       - name: Package Release ZIP
         shell: pwsh
-        run: |
-          Compress-Archive -Path "dist/FetchYT" -DestinationPath "FetchYT-windows-x64.zip"
+        run: Compress-Archive -Path dist/FetchYT.exe, THIRD_PARTY_LICENSES.txt, LICENSE-LGPLv2.1.txt, LICENSE-LGPLv3.txt -DestinationPath FetchYT-windows-x64.zip
 
       - name: Upload Binary to GitHub Releases
         uses: softprops/action-gh-release@v2

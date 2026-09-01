@@ -50,7 +50,7 @@ python main.py
 pip install pyinstaller
 ```
 ```
-pyinstaller --noconfirm --onedir --windowed `
+pyinstaller --noconfirm --onefile --windowed `
   --icon "assets/icon.ico" `
   --add-data "core/bin/node.exe;core/bin" `
   --add-data "assets/icon.ico;assets" `
