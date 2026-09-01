@@ -8,6 +8,7 @@ FetchYT is a simple YouTube downloader I made as I was bored with all the AD clu
   <img src="assets/preview_empty.png" width="48%" alt="FetchYT Idle State" />
   <img src="assets/preview_loaded.png" width="48%" alt="FetchYT Metadata Preview" />
 </p>
+
 ## Download:
 
 1. Navigate to the **[Latest Release](../../releases/latest)** page.
