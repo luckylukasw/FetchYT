@@ -11,9 +11,9 @@ def get_platform_icon() -> QIcon:
     base_dir = os.path.dirname(os.path.abspath(__file__))
 
     if sys.platform == "win32":
-        icon_path = os.path.join(base_dir, "icon.ico")
+        icon_path = os.path.join(base_dir, "assets/icon.ico")
     else:
-        icon_path = os.path.join(base_dir, "icon.png")
+        icon_path = os.path.join(base_dir, "assets/icon.png")
 
     return QIcon(icon_path) if os.path.exists(icon_path) else QIcon()
 
