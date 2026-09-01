@@ -19,10 +19,16 @@ FetchYT is a simple YouTube downloader I made as I was bored with all the AD clu
 ## Build & Run from Source
 If you rather want to compile and build from the source code:
 
+### Prerequisites
+
+- Python 3.10 or higher
+- Git
 
 1. Clone and Set Up Environment
 ```bash
-git clone [https://github.com/your-username/FetchYT.git](https://github.com/your-username/FetchYT.git)
+git clone https://github.com/luckylukasw/FetchYT.git
+```
+```
 cd FetchYT
 ```
 ```
