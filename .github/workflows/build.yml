@@ -31,7 +31,7 @@ jobs:
 
       - name: Compile Executable with PyInstaller
         run: |
-          pyinstaller --noconfirm --onedir --windowed `
+          pyinstaller --noconfirm --onefile --windowed `
             --icon "assets/icon.ico" `
             --add-data "core/bin/node.exe;core/bin" `
             --add-data "assets/icon.ico;assets" `
@@ -41,9 +41,15 @@ jobs:
             --name "FetchYT" `
             main.py
 
-      - name: Package Release ZIP
+      - name: Create ZIP
         shell: pwsh
-        run: Compress-Archive -Path dist/FetchYT.exe, THIRD_PARTY_LICENSES.txt, LICENSE-LGPLv2.1.txt, LICENSE-LGPLv3.txt -DestinationPath FetchYT-windows-x64.zip
+        run: |
+          New-Item -ItemType Directory -Force -Path release
+          Copy-Item "dist/FetchYT.exe" -Destination "release/"
+          Copy-Item "THIRD_PARTY_LICENSES.txt" -Destination "release/"
+          Copy-Item "LICENSE-LGPLv2.1.txt" -Destination "release/"
+          Copy-Item "LICENSE-LGPLv3.txt" -Destination "release/"
+          Compress-Archive -Path "release/*" -DestinationPath "FetchYT-windows-x64.zip"
 
       - name: Upload Binary to GitHub Releases
         uses: softprops/action-gh-release@v2
