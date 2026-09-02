@@ -1,3 +1,8 @@
+"""Downloader file for executing and keeping track of downloads
+
+This file contains all functions related to fetching data from the targeted url.
+Combined with signals.py makes up the framework used to fetch, bundle and download mp4/mp3.
+"""
 import os
 import glob
 import sys
@@ -10,7 +15,6 @@ FFMPEG_EXE = imageio_ffmpeg.get_ffmpeg_exe()
 
 def get_node_path() -> str | None:
     """Resolves node.exe path for both source runs and PyInstaller builds."""
-    # PyInstaller unpack directory check
     if hasattr(sys, '_MEIPASS'):
         bundle_path = os.path.join(sys._MEIPASS, 'core', 'bin', 'node.exe')
         if os.path.exists(bundle_path):

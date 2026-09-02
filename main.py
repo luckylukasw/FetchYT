@@ -1,10 +1,13 @@
+"""Main file for running application
+
+This module defines the start of the program, handles icon assignment and platform validation.
+"""
 import sys
 import os
 import ctypes
 from PySide6.QtWidgets import QApplication
 from PySide6.QtGui import QIcon
 from ui.main_window import MainWindow
-
 
 def get_platform_icon() -> QIcon:
     """Returns .ico on Windows and .png on Linux/macOS."""
@@ -19,24 +22,19 @@ def get_platform_icon() -> QIcon:
 
 
 def main():
-    # 1. Register Explicit App ID so Windows Taskbar pins the icon properly
+    """Main function for running application"""
+
     if sys.platform == "win32":
         myappid = "fetchyt.downloader.app.1.0"
         ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
 
     app = QApplication(sys.argv)
-
-    # 2. Set App-level Icon (controls taskbar, dock, dialogs)
     app_icon = get_platform_icon()
     app.setWindowIcon(app_icon)
-
     window = MainWindow()
-    # 3. Set Window-level Icon (controls the top-left title bar)
     window.setWindowIcon(app_icon)
-
     window.show()
     sys.exit(app.exec())
-
 
 if __name__ == "__main__":
     main()

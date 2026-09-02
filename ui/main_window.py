@@ -1,14 +1,14 @@
 """UI for FetchYT application window
 
 This module defines the MainWindow widget, managing URL inputs, video preview
-rendering, format selection, progress tracking, and log display.
+rendering, format selection, progress tracking, and log display. The UI uses the QT library and language
+as well as QT widgets.
 """
 
 from __future__ import annotations
 
 import os
 import threading
-from typing import Any
 
 from PySide6.QtCore import Qt, QTimer
 from PySide6.QtGui import QPixmap

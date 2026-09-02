@@ -1,3 +1,5 @@
+"""Styling file for the QT widgets
+"""
 THEME = """
 QWidget {
     background-color: #0f172a;
